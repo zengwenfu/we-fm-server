@@ -1,0 +1,35 @@
+Arguments: 
+  /Users/abc/.nvm/versions/node/v6.0.0/bin/node /Users/abc/.yarn/bin/yarn.js add -D express --network-concurrency 1
+
+PATH: 
+  /Users/abc/.nvm/versions/node/v6.0.0/bin:/Users/abc/.yarn/bin:/Users/abc/.yarn/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Wireshark.app/Contents/MacOS
+
+Yarn version: 
+  0.21.3
+
+Node version: 
+  6.0.0
+
+Platform: 
+  darwin x64
+
+npm manifest: 
+  {
+    "name": "we-fm-server",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": "https://github.com/zengwenfu/we-fm-server.git",
+    "author": "zengwenfu",
+    "license": "MIT"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: read ETIMEDOUT
+      at exports._errnoException (util.js:896:11)
+      at TLSWrap.onread (net.js:556:26)

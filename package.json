@@ -1,0 +1,14 @@
+{
+  "name": "we-fm-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/zengwenfu/we-fm-server.git",
+  "author": "zengwenfu",
+  "license": "MIT",
+  "scripts": {
+    "start": "node ./app/app.js"
+  },
+  "devDependencies": {
+    "express": "^4.15.2"
+  }
+}
