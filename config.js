@@ -6,6 +6,7 @@ var user = {
 
 
 var task = {
+	id: '',//id
 	userid: '', //用户id
 	date: '2017/03/30', //日期
 	start: '09:00',
