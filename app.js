@@ -3,15 +3,21 @@ var http = require('http');
 var timer = require('./app/routers/timer.js');
 var user = require('./app/routers/user.js');
 var path = require('path');
+var bodyParser = require('body-parser');
+
 
 var port = 5000;
 var app = express();
 
 app.use(express.static(path.join(__dirname, '/doc')));
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 // 配置路由
 app.use('/timer', timer);
 app.use('/user', user);
+
 
 
 
