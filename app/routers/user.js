@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 var jscode = require('../wx/jscode2session.js');
 var sessionFactory = require('../redis/sessionFactory.js');
+var parseRes = require('../tools/parseRes.js');
+var parseSuccess = parseRes.parseSuccess;
+var parseError = parseRes.parseError;
 
 /**
 	初次登录，需要注册用户
@@ -25,7 +28,9 @@ router.post('/login', function(req, res, next) {
 	var code = req.body.code;
 	jscode(code).then(function(data) {
 		var key = sessionFactory.set(data.toString());
-		res.send(key);
+		res.send(parseSuccess({
+			key: key
+		}));
 	});
 });
 
