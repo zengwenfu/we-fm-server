@@ -6,7 +6,5 @@ node_modules/*
 npm-debug.log
 #忽略yarn.lock
 yarn.lock
-#忽略upload projects temp
-output/projects/*
-output/temp/*
-output/upload/*
+#忽略wx/config
+app/wx/config.js
