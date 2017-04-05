@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var jscode = require('../wx/jscode2session.js');
+var sessionFactory = require('../redis/sessionFactory.js');
 
 /**
 	初次登录，需要注册用户
@@ -23,7 +24,9 @@ router.post('/register', function(req, res, next) {
 router.post('/login', function(req, res, next) {
 	var code = req.body.code;
 	jscode(code).then(function(data) {
-		res.send(data);
+		sessionFactory.set(data, function(key) {
+			res.send(key);
+		});
 	});
 });
 
