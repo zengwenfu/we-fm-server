@@ -1,27 +1,29 @@
 var redis = require('redis');
 var client = redis.createClient();
-var connected = false;
+
+ 
+function connect() {
+	return new Promise(function(resolve, reject) {
+		//连接成功
+		client.on('connect', function() {
+			console.log('redis connected');
+			resolve(client);
+		});
 
 
-module.exports = function(callback) {
+		//连接失败
+		client.on('error', function(err) {
+			console.log(err);
+		});
+	});
+	
+}
 
-	//已经连接过
-	if(connected) {
-		callback(null, client);
+
+module.exports = {
+	connect: connect,
+	getClient: function() {
+		return client;
 	}
-
-	//连接成功
-	client.on('connect', function() {
-	    console.log('redis connected');
-	    connected = true;
-	    callback(null, client)
-	});
-
-
-	//连接失败
-	client.on('error', function(err) {
-		console.log(err);
-		callback(err);
-	});
 }
 

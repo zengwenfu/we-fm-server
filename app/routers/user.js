@@ -24,9 +24,8 @@ router.post('/register', function(req, res, next) {
 router.post('/login', function(req, res, next) {
 	var code = req.body.code;
 	jscode(code).then(function(data) {
-		sessionFactory.set(data, function(key) {
-			res.send(key);
-		});
+		var key = sessionFactory.set(data.toString());
+		res.send(key);
 	});
 });
 

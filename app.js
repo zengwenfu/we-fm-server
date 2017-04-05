@@ -4,6 +4,8 @@ var timer = require('./app/routers/timer.js');
 var user = require('./app/routers/user.js');
 var path = require('path');
 var bodyParser = require('body-parser');
+var connectRedis = require('./app/redis/connect.js').connect;
+
 
 
 var port = 5000;
@@ -14,11 +16,12 @@ app.use(express.static(path.join(__dirname, '/doc')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// 配置路由
-app.use('/timer', timer);
-app.use('/user', user);
-
-
+//连接redis
+connectRedis().then(function(client) {
+	// 配置路由
+	app.use('/timer', timer);
+	app.use('/user', user);
+});
 
 
 // 创建应用服务器
