@@ -4,6 +4,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var connectRedis = require('./app/redis/connect.js').connect;
 var connectMongo = require('./app/mongo/connect.js');
+var sessionMiddleware = require('./app/middleware/sessionMiddleware.js');
 
 
 
@@ -19,11 +20,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 connectRedis().then(function() {
 	return connectMongo();
 }).then(function() {
-	var timer = require('./app/routers/timer.js');
-	var user = require('./app/routers/user.js');
-	// 配置路由
-	app.use('/timer', timer);
-	app.use('/user', user);
+
+	// 登录态拦截
+	app.use('/timer/*', sessionMiddleware);
+
+	// 用户相关接口(不需要登录态)
+	app.use('/user', require('./app/routers/user.js'));
+	app.use('/timer', require('./app/routers/timer.js'));
 });
 
 
