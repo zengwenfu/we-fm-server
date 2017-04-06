@@ -7,8 +7,32 @@
 
 <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <script type="text/javascript">
-	$.post('/user/login', {code: '013CTXxp03pu0r1kG9yp0JmZxp0CTXxe'}, function(data) {
-		console.log(data);
+	// $.post('/user/login', {code: '013CTXxp03pu0r1kG9yp0JmZxp0CTXxe'}, function(data) {
+	// 	console.log(data);
+	// });
+
+	var data = {
+		//头像
+		avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqBVsqgZuGsIe29qXl9xiaLcbQcPqovHiacQAwPuMmqaMSrribAibZ5LDAV1UBow4bgLckmKu8qj0biasw/0",
+		//城市
+		city: "Shenzhen",
+		//国家
+		country: "CN",
+		//性别 0：未知、1：男、2：女
+		gender: 1,
+		//语言
+		language: "zh_CN",
+		//昵称
+		nickName: "小虫",
+		//省份
+		province: "Guangdong",
+	}
+
+	$.post('/user/register', {
+		sessionid: '16dd9eb0-1a78-11e7-a93b-97017328f40e',
+	 	data: JSON.stringify(data)
+	}, function() {
+
 	});
 </script>
 </body>
