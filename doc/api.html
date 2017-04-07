@@ -129,31 +129,31 @@
 </table>
 <p>5）返回实例</p>
 <div class="codehilite"><pre>    {
-        code: &#39;0&#39;, //成功
-        msg: &#39;&#39;,
-        data: {
-             date: &#39;2017/03/30&#39;,
-             list:[
+        &quot;code&quot;: &quot;0&quot;, 
+        &quot;msg&quot;: &quot;&quot;, 
+        &quot;data&quot;: {
+            &quot;list&quot;: [
                 {
-                    id: &#39;&#39;,
-                    type: &#39;1&#39;,
-                    title: &#39;处理老板的邮件&#39;,
-                    finished: &#39;0&#39;, 
-                    discript: &#39;这件事情非常紧急，如果不及时处理，又被辞退的风险&#39;,
-                    start: &#39;09:00&#39;,
-                    end: &#39;10:00&#39;
-                }, {
-                    id: &#39;&#39;,
-                    type: &#39;2&#39;,
-                    title: &#39;处理老板的邮件&#39;,
-                    finished: &#39;0&#39;, 
-                    discript: &#39;这件事情非常紧急，如果不及时处理，又被辞退的风险&#39;,
-                    start: &#39;09:00&#39;,
-                    end: &#39;10:00&#39;
+                    &quot;type&quot;: &quot;1&quot;, 
+                    &quot;title&quot;: &quot;测试任务&quot;, 
+                    &quot;discript&quot;: &quot;任务描述&quot;, 
+                    &quot;start&quot;: &quot;10:00&quot;, 
+                    &quot;end&quot;: &quot;11:00&quot;, 
+                    &quot;userid&quot;: &quot;oUv8K0dIqAgjh9aCUvagBpdTYac0&quot;, 
+                    &quot;finished&quot;: &quot;1&quot;, 
+                    &quot;date&quot;: &quot;2017/04/07&quot;, 
+                    &quot;_id&quot;: &quot;58e70a4d74b549052ae2a7f5&quot;, 
+                    &quot;__v&quot;: 0
                 }
-            ]   
+            ], 
+            &quot;date&quot;: &quot;2017/04/07&quot;
         }
     }
+</pre></div>
+
+
+<p>6) 调用实例(在微信请求不需要显示输入sessionid)</p>
+<div class="codehilite"><pre>    http://localhost:5000/timer/getToday?sessionid=16dd9eb0-1a78-11e7-a93b-97017328f40e
 </pre></div>
 
 
@@ -185,7 +185,12 @@
 </tr>
 </tbody>
 </table>
-<p>4) 返回值说明，同上</p>
+<p>4) 返回值说明，同上
+5）调用实例</p>
+<div class="codehilite"><pre>    http://localhost:5000/timer/getByDate?sessionid=16dd9eb0-1a78-11e7-a93b-97017328f40e&amp;date=2017/04/07
+</pre></div>
+
+
 <h2>增加日程</h2>
 <p>1）请求类型：post  <br>
 2）url:   http://we.facemagic888.com/timer/addTask  <br>
@@ -244,14 +249,26 @@
 </tr>
 </tbody>
 </table>
-<p>4) 返回实例：</p>
-<div class="codehilite"><pre>    {
-        code: &#39;0&#39;,
-        msg: &#39;&#39;,
-        data: {
-
-        }
+<p>4) 调用实例：</p>
+<div class="codehilite"><pre>    var data = {
+        //类型1，2，3，4（重要紧急，紧急不重要，不紧急重要，不紧急不重要）
+        type: &#39;1&#39;,
+        //标题
+        title: &#39;测试任务&#39;,
+        //描述
+        discript: &#39;任务描述&#39;,
+        //开始时间 HH:mm
+        start: &#39;10:00&#39;,
+        //结束时间 HH:mm
+        end: &#39;11:00&#39;
     }
+
+    $.post(&#39;/timer/addTask&#39;, {
+        data: JSON.stringify(data),
+        sessionid: &#39;16dd9eb0-1a78-11e7-a93b-97017328f40e&#39;
+    }, function(id) {
+        console.log(id);
+    });
 </pre></div>
 
 
@@ -313,14 +330,19 @@
 </tr>
 </tbody>
 </table>
-<p>4) 返回实例：</p>
-<div class="codehilite"><pre>    {
-        code: &#39;0&#39;,
-        msg: &#39;&#39;,
-        data: {
-
-        }
+<p>4) 调用实例：</p>
+<div class="codehilite"><pre>    var data = {
+        _id: &#39;58e70a4d74b549052ae2a7f5&#39;,
+        finished: &#39;1&#39; 
     }
+
+
+    $.post(&#39;/timer/editTask&#39;, {
+        data: JSON.stringify(data),
+        sessionid: &#39;16dd9eb0-1a78-11e7-a93b-97017328f40e&#39;
+    }, function(id) {
+        console.log(id);
+    });
 </pre></div>
 
 
@@ -346,14 +368,12 @@
 </tr>
 </tbody>
 </table>
-<p>4) 返回实例：</p>
-<div class="codehilite"><pre>    {
-        code: &#39;0&#39;,
-        msg: &#39;&#39;,
-        data: {
+<p>4) 调用实例：</p>
+<div class="codehilite"><pre>    $.post(&#39;/timer/deleteTask&#39;, {
+        id: &#39;58e70a0d8b53b00503359833&#39;, sessionid:&#39;16dd9eb0-1a78-11e7-a93b-97017328f40e&#39;
+    }, function() {
 
-        }
-    }
+    });
 </pre></div>
 
 

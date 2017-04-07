@@ -28,4 +28,7 @@ var tableSchema = new mongoose.Schema({
 	extend2: String
 });
 
+// 为常用的联合查询建立索引
+tableSchema.index({ date: -1, userid: -1 });
+
 mongoose.model(modelName, tableSchema, tableName);

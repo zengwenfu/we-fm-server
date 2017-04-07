@@ -24,7 +24,7 @@ module.exports = function(req, res, next) {
 				res.send(parseError(ERROR_SESSIONID, ERROR_SESSIONID_MSG));
 			}
 			var ses = JSON.parse(reply);
-			req.body.openid = ses.openid;
+			req.openid = ses.openid;
 			next();
 		} else {
 			res.send(parseError(ERROR_READ_SESSION, ERROR_READ_SESSION_MSG));

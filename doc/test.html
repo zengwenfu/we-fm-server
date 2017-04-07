@@ -11,29 +11,77 @@
 	// 	console.log(data);
 	// });
 
-	var data = {
-		//头像
-		avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqBVsqgZuGsIe29qXl9xiaLcbQcPqovHiacQAwPuMmqaMSrribAibZ5LDAV1UBow4bgLckmKu8qj0biasw/0",
-		//城市
-		city: "Shenzhen",
-		//国家
-		country: "CN",
-		//性别 0：未知、1：男、2：女
-		gender: 1,
-		//语言
-		language: "zh_CN",
-		//昵称
-		nickName: "小虫",
-		//省份
-		province: "Guangdong",
-	}
+	// var data = {
+	// 	//头像
+	// 	avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqBVsqgZuGsIe29qXl9xiaLcbQcPqovHiacQAwPuMmqaMSrribAibZ5LDAV1UBow4bgLckmKu8qj0biasw/0",
+	// 	//城市
+	// 	city: "Shenzhen",
+	// 	//国家
+	// 	country: "CN",
+	// 	//性别 0：未知、1：男、2：女
+	// 	gender: 1,
+	// 	//语言
+	// 	language: "zh_CN",
+	// 	//昵称
+	// 	nickName: "小虫",
+	// 	//省份
+	// 	province: "Guangdong",
+	// }
 
-	$.post('/user/register', {
-		sessionid: '16dd9eb0-1a78-11e7-a93b-97017328f40e',
-	 	data: JSON.stringify(data)
-	}, function() {
+	// $.post('/user/register', {
+	// 	sessionid: '16dd9eb0-1a78-11e7-a93b-97017328f40e',
+	//  	data: JSON.stringify(data)
+	// }, function() {
 
-	});
+	// });
+
+
+	// var data = {
+	// 	//类型1，2，3，4（重要紧急，紧急不重要，不紧急重要，不紧急不重要）
+	// 	type: '1',
+	// 	//标题
+	// 	title: '测试任务',
+	// 	//描述
+	// 	discript: '任务描述',
+	// 	//开始时间 HH:mm
+	// 	start: '10:00',
+	// 	//结束时间 HH:mm
+	// 	end: '11:00'
+	// }
+
+	// $.post('/timer/addTask', {
+	// 	data: JSON.stringify(data),
+	// 	sessionid: '16dd9eb0-1a78-11e7-a93b-97017328f40e'
+	// }, function(id) {
+	// 	console.log(id);
+	// });
+
+
+
+
+	// var data = {
+	// 	_id: '58e70a4d74b549052ae2a7f5',
+	// 	finished: '1' 
+	// }
+
+
+	// $.post('/timer/editTask', {
+	// 	data: JSON.stringify(data),
+	// 	sessionid: '16dd9eb0-1a78-11e7-a93b-97017328f40e'
+	// }, function(id) {
+	// 	console.log(id);
+	// });
+
+	// http://localhost:5000/timer/getByDate?sessionid=16dd9eb0-1a78-11e7-a93b-97017328f40e&date=2017/04/07
+
+	//http://localhost:5000/timer/getToday?sessionid=16dd9eb0-1a78-11e7-a93b-97017328f40e
+
+
+	// $.post('/timer/deleteTask', {id: '58e70a0d8b53b00503359833', sessionid:'16dd9eb0-1a78-11e7-a93b-97017328f40e'}, function() {
+
+	// });
+
+
 </script>
 </body>
 </html>
