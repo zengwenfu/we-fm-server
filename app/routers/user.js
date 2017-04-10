@@ -15,6 +15,9 @@ const ERROR_SESSIONID_MSG = parseRes.ERROR_SESSIONID_MSG;
 const ERROR_READ_SESSION = parseRes.ERROR_READ_SESSION;
 const ERROR_READ_SESSION_MSG = parseRes.ERROR_READ_SESSION_MSG;
 
+
+
+
 /**
 	初次登录，需要注册用户
 */
@@ -37,30 +40,7 @@ router.post('/register', function(req, res, next) {
 	});
 });
 
-//检查该用户是否已经注册过
-function checkHasRegister(sessionid, data) {
-	return new Promise(resolve, reject) {
-		sessionFactory.get(sessionid, function(err, reply) {
-			if(!err) {
-				//删掉无用的
-				sessionFactory.del(sessionid);
-				if(!reply) {
-					resolve(false);
-					return;
-				}
-				data = JSON.parse(data);
-				reply = JSON.parse(reply);
-				if(data.openid === reply.openid) {
-					resolve(true);
-				} else {
-					resolve(false);
-				}
-			} else {
-				resolve(false);
-			}
-		});
-	}
-}
+
 
 /**
 *  登录
@@ -72,7 +52,7 @@ router.post('/login', function(req, res, next) {
 	var sessionid = req.body.sessionid;
 	
 	jscode(code).then(function(data) {
-		data = data.toString;
+		data = data.toString();
 		var key = sessionFactory.set(data);
 		if(!sessionid) {
 			res.send(parseSuccess({
@@ -80,7 +60,7 @@ router.post('/login', function(req, res, next) {
 				registered: '0'
 			}));
 		} else {
-			checkHasRegister(sessionid, data).then(function(registered) {
+			sessionFactory.checkHasRegister(sessionid, data).then(function(registered) {
 				res.send(parseSuccess({
 					sessionid: key,
 					registered: registered ? '1' : '0'
@@ -90,7 +70,6 @@ router.post('/login', function(req, res, next) {
 		
 	});
 });
-
 
 
 module.exports = router;

@@ -23,5 +23,30 @@ module.exports = {
 	**/
 	get: function(key, callback) {
 		client.get(key, callback);
+	},
+
+	checkHasRegister: function(sessionid, data) {
+		var self = this;
+		return new Promise(function(resolve, reject) {
+			self.get(sessionid, function(err, reply) {
+				if(!err) {
+					//删掉无用的
+					self.del(sessionid);
+					if(!reply) {
+						resolve(false);
+						return;
+					}
+					data = JSON.parse(data);
+					reply = JSON.parse(reply);
+					if(data.openid === reply.openid) {
+						resolve(true);
+					} else {
+						resolve(false);
+					}
+				} else {
+					resolve(false);
+				}
+			});
+		}) 
 	}
 }
