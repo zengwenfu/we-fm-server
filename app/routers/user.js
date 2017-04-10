@@ -37,19 +37,60 @@ router.post('/register', function(req, res, next) {
 	});
 });
 
+//检查该用户是否已经注册过
+function checkHasRegister(sessionid, data) {
+	return new Promise(resolve, reject) {
+		sessionFactory.get(sessionid, function(err, reply) {
+			if(!err) {
+				//删掉无用的
+				sessionFactory.del(sessionid);
+				if(!reply) {
+					resolve(false);
+					return;
+				}
+				data = JSON.parse(data);
+				reply = JSON.parse(reply);
+				if(data.openid === reply.openid) {
+					resolve(true);
+				} else {
+					resolve(false);
+				}
+			} else {
+				resolve(false);
+			}
+		});
+	}
+}
 
 /**
 *  登录
 */
 router.post('/login', function(req, res, next) {
 	var code = req.body.code;
+	
+	//原先的会话id
+	var sessionid = req.body.sessionid;
+	
 	jscode(code).then(function(data) {
-		var key = sessionFactory.set(data.toString());
-		res.send(parseSuccess({
-			sessionid: key
-		}));
+		data = data.toString;
+		var key = sessionFactory.set(data);
+		if(!sessionid) {
+			res.send(parseSuccess({
+				sessionid: key,
+				registered: '0'
+			}));
+		} else {
+			checkHasRegister(sessionid, data).then(function(registered) {
+				res.send(parseSuccess({
+					sessionid: key,
+					registered: registered ? '1' : '0'
+				}));
+			});
+		}
+		
 	});
 });
+
 
 
 module.exports = router;

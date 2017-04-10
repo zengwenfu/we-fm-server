@@ -15,6 +15,9 @@ module.exports = {
 		client.expire(key, 60*60*24);
 		return key;
 	},
+	del: function(key) {
+		client.del(key);
+	},
 	/**
 		callback(err, reply)
 	**/
