@@ -20,9 +20,9 @@ module.exports = function(req, res, next) {
 	//查询openid
 	sessionFactory.get(sessionid, function(err, reply) {
 		if(!err) {
-			console.log(reply);
 			if(!reply) {
 				res.send(parseError(ERROR_SESSIONID, ERROR_SESSIONID_MSG));
+				return;
 			}
 			var ses = JSON.parse(reply);
 			req.openid = ses.openid;
